@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\PassportAuthController;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /*
@@ -22,6 +23,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('/register', [PassportAuthController::class, 'register']);
+Route::post('/login', [PassportAuthController::class, 'login']);
+
+
+// Routes protected by auth:sanctum middleware
+Route::middleware('jwt.auth')->group(function () {
+    // Create
+    Route::post('/places',[PlaceController::class, 'store']);
+    // Read
+    
+    // Update
+    Route::put('/places/{id}',[PlaceController::class,'update']);
+    // Delete
+    Route::delete('/places/{id}',[PlaceController::class,'delete']);
+
+});
+
+
 
 Route::get('/hello',function(){
     return "<h1>Selamat Pagi Dunia!!!!<h1>";
@@ -38,11 +57,8 @@ Route::post('/info',function(Request $request){
 });
 
 
-Route::post('/places',[PlaceController::class, 'store']);
 Route::get('/places',[PlaceController::class, 'index']);
 Route::get('/places/{id}',[PlaceController::class, 'show']);
-Route::put('/places/{id}',[PlaceController::class, 'update']);
-Route::delete('/places/{id}',[PlaceController::class, 'delete']);
 
 Route::post('/reviews',[ReviewController::class, 'store']);
 
@@ -50,3 +66,4 @@ Route::post('/reviews',[ReviewController::class, 'store']);
 
 // one of the way to decide on the db decide on the table, properties(fields) and relationship this can be look on the ui.
 // why ui? because normally development came after ui. as a developer you should have the skill to understand what the db should have just by looking on the ui.
+

@@ -36,7 +36,9 @@ class PlaceController extends Controller
  
      // Read all
      public function index(){
-        $places = Place::all();
+        //$places = Place::all();
+
+        $places = Place::select('id','name','address','image_url')->get();
 
         if($places){
             return response()->json([
