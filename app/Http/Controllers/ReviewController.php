@@ -24,7 +24,7 @@ class ReviewController extends Controller
                $place->avg_rating = ($place->avg_rating *
                count($place['reviews']) + $request->rating) /
                (count($place['reviews']) + 1);
-                    
+
                $user = JWTAuth::parseToken()->authneticate();
                $userId = $user->id;
                
@@ -41,7 +41,7 @@ class ReviewController extends Controller
           }
 
           catch (\Exception $err){
-               return response()->json(["sucess"=>false,"message"=>$err]);
+               return response()->json(["success"=>false  ,"message"=>$err]);
           }
 
 
