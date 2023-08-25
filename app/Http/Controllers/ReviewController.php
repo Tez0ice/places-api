@@ -20,7 +20,7 @@ class ReviewController extends Controller
 
           try{
                $place = Place::find($id);
-               $place->avg_rating = ($place->avg_rating * count($place->reviews) + $request->avg_rating) / (count($place->reviews+1));
+               $place->avg_rating = ($place->avg_rating * count($place->reviews) + $request->rating) / (count($place->reviews+1));
      
                $user = JWTAuth::parseToken()->authneticate();
                $userId = $user->id;
