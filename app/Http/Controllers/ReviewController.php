@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
      // Create
-     public function store(Request $request){
+     public function store(Request $request, $id){
           $review = new Review();
           $review->rating = $request->rating; 
           $review->comments = $request->comments;
 
      
           $review->user_id = User::find($request->user_id)->id;
-          $review->place_id = Place::find($request->place_id)->id;
+          $review->place_id = Place::find($id)->id;
 
           if ($review->save()){
                return response()->json([
