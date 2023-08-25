@@ -34,11 +34,11 @@ class ReviewController extends Controller
                     "comments"=>$request->comments,
                ]);
 
-               response()->json(['success'=>true,"message"=>"Review successfully added"]);
+               return response()->json(['success'=>true,"message"=>"Review successfully added"]);
           }
 
           catch (\Exception $err){
-               response()->json(["sucess"=>false,"message"=>$err]);
+               return response()->json(["sucess"=>false,"message"=>$err]);
           }
 
 
