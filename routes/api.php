@@ -38,6 +38,8 @@ Route::middleware('jwt.auth')->group(function () {
     // Delete
     Route::delete('/places/{id}',[PlaceController::class,'delete']);
 
+    Route::post('/places/{id}/reviews',[ReviewController::class, 'store']);
+
 });
 
 
@@ -60,7 +62,6 @@ Route::post('/info',function(Request $request){
 Route::get('/places',[PlaceController::class, 'index']);
 Route::get('/places/{id}',[PlaceController::class, 'show']);
 
-Route::post('/reviews',[ReviewController::class, 'store']);
 
 // database could be serve as two purpose. save data to db or db normalization (converting existential data to db).
 
